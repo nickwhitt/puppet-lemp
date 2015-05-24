@@ -1,24 +1,17 @@
-exec { 'apt-update':
-    command => '/usr/bin/apt-get update'
+class { ['nginx', 'php::fpm', 'php::cli']: }
+
+nginx::resource::vhost { 'vagrant.app':
+  www_root => '/vagrant',
 }
 
-package { 'nginx':
-  require => Exec['apt-update'],
-  ensure => installed,
-}
-
-service { 'nginx':
-    ensure => running,
-}
-
-package { 'php5-fpm':
-  require => Exec['apt-update'],
-  ensure => installed,
-}
-
-file { '/etc/nginx/sites-available/default':
-    ensure => present,
-    source => '/vagrant/manifests/nginx_default',
-    require => Package['nginx'],
-    notify => Service['nginx'],
+nginx::resource::location { 'vagrant_root':
+  ensure        => present,
+  vhost         => 'vagrant.app',
+  www_root      => '/vagrant',
+  location      => '~ \.php$',
+  index_files   => ['index.php', 'index.html', 'index.htm'],
+  fastcgi       => 'unix:/var/run/php5-fpm.sock',
+  fastcgi_param => {
+    'SCRIPT_FILENAME' => '$document_root/$fastcgi_script_name',
+  },
 }
