@@ -15,3 +15,22 @@ nginx::resource::location { 'vagrant_root':
     'SCRIPT_FILENAME' => '$document_root/$fastcgi_script_name',
   },
 }
+
+class { '::mysql::server':
+  package_name            => 'mariadb-server',
+  root_password           => 'secret',
+  remove_default_accounts => true,
+}
+
+class { '::mysql::client':
+  package_name => 'mariadb-client',
+}
+
+class { '::mysql::bindings':
+  php_enable => 'true',
+}
+
+mysql::db { 'app':
+  user     => 'vagrant',
+  password => 'vagrant',
+}

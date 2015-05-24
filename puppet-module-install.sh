@@ -8,3 +8,7 @@ fi
 if [ ! -d /etc/puppet/modules/php ]; then
     puppet module install nodes/php
 fi
+
+if [ ! -d /etc/puppet/modules/mysql ]; then
+    puppet module install puppetlabs-mysql
+fi
