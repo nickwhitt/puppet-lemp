@@ -1,6 +1,4 @@
 # Puppet LEMP
----
-
 Vagrant provisioner with Puppet.
 
 Installs a LEMP stack for development environment:
