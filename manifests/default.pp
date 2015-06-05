@@ -1,13 +1,13 @@
-class { ['nginx', 'php::fpm', 'php::cli', 'php::extension::gd', 'php::extension::xdebug']: }
+hiera_include('classes')
 
 nginx::resource::vhost { 'vagrant.app':
-  www_root => '/vagrant',
+  www_root => hiera('nginx::www_root', '/vagrant'),
 }
 
 nginx::resource::location { 'vagrant_root':
   ensure        => present,
-  vhost         => 'vagrant.app',
-  www_root      => '/vagrant',
+  vhost         => hiera('nginx::vhost', 'vagrant.app'),
+  www_root      => hiera('nginx::www_root', '/vagrant'),
   location      => '~ \.php$',
   index_files   => ['index.php', 'index.html', 'index.htm'],
   fastcgi       => 'unix:/var/run/php5-fpm.sock',
@@ -17,13 +17,13 @@ nginx::resource::location { 'vagrant_root':
 }
 
 class { 'timezone':
-    timezone => 'America/New_York',
+    timezone => hiera('timezone', 'UTC'),
 }
 
 class { '::mysql::server':
   package_name            => 'mariadb-server',
-  root_password           => 'secret',
-  remove_default_accounts => true,
+  root_password           => hiera('mysql::root_password', 'secret'),
+  remove_default_accounts => hiera('mysql::remove_default_accounts', true),
 }
 
 class { '::mysql::client':
@@ -35,6 +35,7 @@ class { '::mysql::bindings':
 }
 
 mysql::db { 'app':
-  user     => 'vagrant',
-  password => 'vagrant',
+  dbname   => hiera('mysql::db', 'app'),
+  user     => hiera('mysql::user', 'vagrant'),
+  password => hiera('mysql::password', 'vagrant'),
 }

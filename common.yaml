@@ -1,0 +1,8 @@
+---
+classes:
+  - 'nginx'
+  - 'php::fpm'
+  - 'php::cli'
+  - 'php::extension::gd'
+  - 'php::extension::xdebug'
+timezone: 'America/New_York'
