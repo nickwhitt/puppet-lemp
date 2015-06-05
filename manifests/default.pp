@@ -1,4 +1,4 @@
-class { ['nginx', 'php::fpm', 'php::cli']: }
+class { ['nginx', 'php::fpm', 'php::cli', 'php::extension::gd', 'php::extension::xdebug']: }
 
 nginx::resource::vhost { 'vagrant.app':
   www_root => '/vagrant',
@@ -14,6 +14,10 @@ nginx::resource::location { 'vagrant_root':
   fastcgi_param => {
     'SCRIPT_FILENAME' => '$document_root/$fastcgi_script_name',
   },
+}
+
+class { 'timezone':
+    timezone => 'America/New_York',
 }
 
 class { '::mysql::server':
