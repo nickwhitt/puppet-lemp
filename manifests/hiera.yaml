@@ -2,5 +2,7 @@
 :backends: yaml
 :yaml:
   :datadir: /vagrant/manifests
-:hierarchy: common
+:hierarchy:
+  - local
+  - common
 :logger: console
