@@ -10,11 +10,11 @@ Vagrant.configure(2) do |config|
     vb.cpus   = 2
   end
 
-  config.vm.provision "shell", path: "apt-update.sh"
-  config.vm.provision "shell", path: "puppet-module-install.sh"
+  config.vm.provision "shell", path: "provision/apt-update.sh"
+  config.vm.provision "shell", path: "provision/puppet-module-install.sh"
 
   config.vm.provision :puppet do |puppet|
-    puppet.hiera_config_path = "hiera.yaml"
+    puppet.hiera_config_path = "manifests/hiera.yaml"
   end
 
 end

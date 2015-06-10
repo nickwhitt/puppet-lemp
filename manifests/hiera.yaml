@@ -1,6 +1,6 @@
 ---
 :backends: yaml
 :yaml:
-  :datadir: /vagrant
+  :datadir: /vagrant/manifests
 :hierarchy: common
 :logger: console
