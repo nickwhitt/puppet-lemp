@@ -1,0 +1,5 @@
+---
+classes:
+  - php::params
+  - php::extension::gd
+  - php::extension::xdebug

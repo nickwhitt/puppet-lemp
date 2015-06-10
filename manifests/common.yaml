@@ -1,8 +1,17 @@
 ---
 classes:
-  - 'nginx'
-  - 'php::fpm'
-  - 'php::cli'
-  - 'php::extension::gd'
-  - 'php::extension::xdebug'
-timezone: 'America/New_York'
+  - timezone
+  - nginx
+  - php::fpm
+  - php::cli
+  - mysql::server
+
+timezone::timezone: 'America/New_York'
+
+mysql::server::package_name: 'mariadb-server'
+mysql::server::root_password: 'secret'
+mysql::server::remove_default_accounts: true
+
+mysql::client::package_name: 'mariadb-client'
+
+mysql::bindings::php_enable: true
