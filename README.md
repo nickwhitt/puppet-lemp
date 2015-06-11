@@ -10,7 +10,7 @@ Installs a LEMP stack for development environment:
 
 ## vagrant.app
 
-Virtual host configuration is automatically configured to serve from the `/vagrant` directory.
+Virtual host is is configured to serve from the `/vagrant` directory.
 
 ## app Database
 
