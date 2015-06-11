@@ -1,7 +1,8 @@
 hiera_include('classes')
 
 nginx::resource::vhost { 'vagrant.app':
-  www_root => '/vagrant',
+  www_root  => '/vagrant',
+  try_files => ['$uri $uri/ /index.php?$args'],
 }
 
 nginx::resource::location { 'vagrant_root':
