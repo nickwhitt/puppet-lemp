@@ -4,6 +4,7 @@ classes:
   - nginx
   - php::fpm
   - php::cli
+  - php::extension::mysql
   - mysql::server
 
 timezone::timezone: 'America/New_York'
