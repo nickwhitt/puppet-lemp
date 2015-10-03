@@ -8,11 +8,29 @@ Installs a LEMP stack for development environment:
 - MariaDB
 - PHP-FPM
 
-## vagrant.app
+## Default Provisioner
 
-Virtual host is is configured to serve from the `/vagrant` directory.
+### vagrant.app
 
-## app Database
+Virtual host is configured to serve from the `/vagrant` directory.
+
+### app Database
+
+Root access is possible as `root:secret`, whereas the `app` database is created for `vagrant:vagrant`.
+
+## Yii 2 Advanced Provisioner
+
+Replace the `default.pp` puppet script with `yii2-advanced.pp`.
+
+### frontend.dev
+
+Virtual host is configured to serve from the `/vagrant/frontend/web` directory.
+
+### backend.dev
+
+Virtual host is configured to serve from the `/vagrant/backend/web` directory.
+
+### app Database
 
 Root access is possible as `root:secret`, whereas the `app` database is created for `vagrant:vagrant`.
 
